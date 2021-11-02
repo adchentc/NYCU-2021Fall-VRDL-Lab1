@@ -18,6 +18,15 @@ The following specs were used to create the original solution.
 # Dataset Preparation
 https://drive.google.com/file/d/1HE5agKoWtAXCS32aYs5owfLq-UbvsnUW/view?usp=sharing
 
+# Requirement
+* After downloading dataset, unzip the file named 'birds'.
+* Unzip the training images and testing images in the birds folder.
+* Creating answer.txt and test_pred.txt files, or you will get error. You can following the command below:
+```
+touch answer.txt
+touch test_pred.txt
+```
+
 # Run
 The code not only trains, but also valid and test the model. You can run the model by following:
 ```
