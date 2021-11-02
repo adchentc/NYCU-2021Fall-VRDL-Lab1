@@ -22,7 +22,7 @@ https://drive.google.com/file/d/1HE5agKoWtAXCS32aYs5owfLq-UbvsnUW/view?usp=shari
 * After downloading dataset, unzip the file named 'birds'.
 * Unzip the training images and testing images in the birds folder.
 
-# Run
+# Train and Valid
 The code not only trains, but also valid and test the model. You can run the model by following:
 ```
 python3 main.py
