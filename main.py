@@ -1,3 +1,4 @@
+import os
 import ssl
 import time
 import torch
@@ -68,6 +69,9 @@ model = resnext50.to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=cg.lr, momentum=cg.momentum)
 
+dir = 'models'
+path = os.path.join('./', dir)
+os.makedirs(path, exist_ok=True)
 
 def train_and_valid(model, criterion, optimizer, epochs):
     history = []
@@ -164,37 +168,3 @@ plt.xlabel('Epoch Number')
 plt.ylabel('Accuracy')
 plt.ylim(0, 1)
 plt.savefig('accuracy_curve.png')
-
-all_data = pp.classify_data(txt=cg.data_dir + '/testing_img_order.txt')
-test_data = LoadDataset(all_data, transform=pp.image_transforms['valid'])
-test_data_loader = DataLoader(test_data, batch_size=cg.batch_size, shuffle=False)
-model = resnext50.to(device)
-torch.load('models/{}.pt'.format(cg.epochs))
-
-predict = []
-model.eval()  # set the model to evaluation mode
-with torch.no_grad():
-    for i, img in enumerate(test_data_loader):
-        inputs = img
-        inputs = inputs.to(device)
-        outputs = model(inputs)
-        _, test_pred = torch.max(outputs, 1)  # get the index of the class with the highest probability
-
-        for y in test_pred.cpu().numpy():
-            predict.append(y + 1)
-
-with open('test_pred.txt', 'w') as f:
-    for i in range(len(predict)):
-        f.write(str(i) + ' ' + str(predict[i]) + '\n')
-
-with open('./birds/testing_img_order.txt', 'r') as file:
-    answer = open('answer.txt', 'w')
-    label = []
-    for y in predict:
-        label.append(pp.find_class_name(y))
-
-    i = 0
-    for line in file:
-        line = line.strip('\n')
-        answer.write(line + ' ' + label[i] + '\n')
-        i = i + 1
