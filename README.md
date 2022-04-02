@@ -1,4 +1,4 @@
-# NYCU_VRDL_Image_Classification
+# VRDL Lab1: Image Classification
 This is homework 1 in NYCU Selected Topics in Visual Recognition Deep Learning class.
 
 # Hardware
